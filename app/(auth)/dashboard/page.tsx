@@ -1,23 +1,45 @@
-"use client"; 
+"use client";
 
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation"; // For navigation
 
 export default function Dashboard() {
   const [totalDevices, setTotalDevices] = useState(0);
   const [iotDevices, setIotDevices] = useState(0);
   const [activeAlerts, setActiveAlerts] = useState(0);
   const [vulnerabilities, setVulnerabilities] = useState(0);
-  const [deviceData, setDeviceData] = useState([]);
-  const [osData, setOsData] = useState([]);
-
+  const router = useRouter();
 
 
   
+  
 
-  // Placeholder data fetching (Replace with actual data fetching logic)
+
+  // Fetch data from the database
   useEffect(() => {
-    // Fetch totals, devices, and OS data
+    const fetchData = async () => {
+      try {
+        
+        const response = await axios.get("http://localhost:5000/api/dashboard/data"); // Ensure backend is running
+        const {
+          totalDevices,
+          iotDevices,
+          activeAlerts,
+          vulnerabilities,
+        } = response.data;
+
+        // Set state with fetched data
+        setTotalDevices(totalDevices || 0);
+        setIotDevices(iotDevices || 0);
+        setActiveAlerts(activeAlerts || 0);
+        setVulnerabilities(vulnerabilities || 0);
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -52,6 +74,14 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+          <div className="mt-8">
+            <button
+              onClick={() => router.push("/add-device")} // Navigate to /add-device
+              className="px-6 py-2 bg-blue-500 text-white rounded-lg"
+            >
+              Add Device
+            </button>
+          </div>
 
           {/* Devices Section */}
           <div className="mb-12">
@@ -59,13 +89,16 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-4 bg-indigo-100 rounded-lg shadow">
                 <h3 className="text-gray-700 mb-2">Device Types</h3>
-                {/* Pie chart placeholder */}
+                {/* Replace with a pie chart component */}
                 <div className="h-40 bg-white rounded-lg shadow-inner">[Pie Chart Here]</div>
               </div>
               <div className="p-4 bg-indigo-100 rounded-lg shadow">
                 <h3 className="text-gray-700 mb-2">Device Statistics</h3>
                 <ul>
-                  <li>Total Device Types: {deviceData.length}</li>
+                  <li>
+                    Total Device Types:{" "}
+                    { "No data available"}
+                  </li>
                   <li>Profiles: {/* Add profiles count */}</li>
                   <li>Devices at Risk: {/* Add count */}</li>
                 </ul>
@@ -85,15 +118,11 @@ export default function Dashboard() {
                     <th className="py-2">% of Total</th>
                   </tr>
                 </thead>
-                 
               </table>
             </div>
           </div>
-
         </div>
       </div>
     </section>
   );
 }
-
-

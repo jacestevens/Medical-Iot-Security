@@ -1,0 +1,33 @@
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: './database.sqlite', // Path to the SQLite database file
+});
+
+const DeviceStatistics = sequelize.define('DeviceStatistics', {
+  total_devices: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  iot_devices: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  active_alerts: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  vulnerabilities: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+}, {
+  timestamps: true, // Enable automatic timestamps
+});
+
+// Sync the model with the database to ensure it exists
+DeviceStatistics.sync().then(() => {
+  console.log('DeviceStatistics table created or already exists');
+});
+
+module.exports = DeviceStatistics;

@@ -1,11 +1,16 @@
 require('dotenv').config({ path: 'key.env' });
-
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const { Sequelize, DataTypes } = require('sequelize');
+const router = require('./models/router'); // Adjust the path to your router file
+const { Device } = require('./models/Device');
+const addDeviceRouter = require('./models/add-device');
 
+
+// Initialize Express app
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Enable Cross-Origin Requests
 app.use(cors());
@@ -19,51 +24,31 @@ const sequelize = new Sequelize({
   storage: './database.sqlite', // Path to the SQLite database file
 });
 
-// Define the User model
-const User = sequelize.define('User ', {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  company: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
 
-// Sync the database (creates tables if they don't exist)
-sequelize.sync().then(() => console.log('Database synced'));
+
+sequelize.sync().then(() => {
+  console.log('Database synced');
+}).catch(err => {
+  console.error('Error syncing database:', err);
+});
 
 // Register route
 app.post('/register', async (req, res) => {
   const { name, company, email, password } = req.body;
 
   if (!name || !company || !email || !password) {
-    return res.status(400).json({ message: "All fields are required" });
+    return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    // Check if a user already exists with the same email
-    const existingUser  = await User.findOne({ where: { email } });
-    if (existingUser ) {
-      return res.status(400).json({ message: "User  already exists with this email" });
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists with this email' });
     }
 
-    // Hash the password before saving
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 rounds of salt
-
-    // Create a new user if no existing one
+    const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({ name, company, email, password: hashedPassword });
-    
+
     res.status(201).json({ message: 'Registration successful!' });
   } catch (err) {
     console.error(err);
@@ -72,30 +57,83 @@ app.post('/register', async (req, res) => {
 });
 
 // Login route
-app.post("/api/auth/login", async (req, res) => {
-  const { email, password } = req.body; // Get email and password from request body
+app.post('/api/auth/login', async (req, res) => {
+  const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ where: { email:email } });
+    const user = await User.findOne({ where: { email } });
     if (!user) {
-      console.error('User  not found');
-      return res.status(400).json({ message: "User  not found" });
+      return res.status(400).json({ message: 'User not found' });
     }
 
-    // Compare the hashed password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      console.error('Password mismatch');
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Successfully authenticated
-    res.json({ message: "Login successful!" });
+    res.json({ message: 'Login successful!' });
   } catch (error) {
-    console.error("Error during login:", error);  // Log detailed error
-    res.status(500).json({ message: "An error occurred. Please try again" });
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'An error occurred. Please try again.' });
   }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Import and mount the dashboard router
+const dashboardRouter = require('./dashboard'); // Adjust the path accordingly
+app.use('/api/dashboard', dashboardRouter);
+
+const DeviceStatistics = sequelize.define("device_statistics", {
+  total_devices: { type: DataTypes.INTEGER, allowNull: false },
+  iot_devices: { type: DataTypes.INTEGER, allowNull: false },
+  active_alerts: { type: DataTypes.INTEGER, allowNull: false },
+  vulnerabilities: { type: DataTypes.INTEGER, allowNull: false },
+});
+
+
+
+dashboardRouter.get("/", async (req, res) => {
+  try {
+    // Fetch the most recent statistics entry
+    const latestStats = await DeviceStatistics.findOne({
+      order: [["id", "DESC"]], // Ensure the latest row is retrieved
+    });
+
+    if (!latestStats) {
+      return res.status(404).json({ message: "No device statistics found" });
+    }
+
+    // Respond with the data
+    res.json({
+      totalDevices: latestStats.total_devices,
+      iotDevices: latestStats.iot_devices,
+      activeAlerts: latestStats.active_alerts,
+      vulnerabilities: latestStats.vulnerabilities,
+    });
+  } catch (error) {
+    console.error("Error fetching device statistics:", error);
+    res.status(500).json({ message: "Error fetching device statistics" });
+  }
+});
+
+
+app.get('/api/devices', async (req, res) => {
+  try {
+    const devices = await Device.findAll();
+    res.json(devices);
+  } catch (error) {
+    console.error('Error fetching devices:', error);
+    res.status(500).json({ message: 'Error fetching devices' });
+  }
+});
+
+app.use('/api', addDeviceRouter); // Add `/api/add-device` route
+
+
+
+
+module.exports = dashboardRouter;
+
+// Start the server
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+module.exports = app;

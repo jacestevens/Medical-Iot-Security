@@ -13,14 +13,14 @@ export default function Workflows() {
           <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
             <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-gradient-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-gradient-to-l after:from-transparent after:to-indigo-200/50">
               <span className="inline-flex bg-gradient-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
-                *insert images below of actual project*
+                
               </span>
             </div>
             <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
-              Map your product journey
+            Simplify, Scale, and Secure Medical IoT Devices
             </h2>
             <p className="text-lg text-indigo-200/65">
-              *still unsure of what to put here*
+             
             </p>
           </div>
           {/* Spotlight items */}
@@ -49,13 +49,7 @@ export default function Workflows() {
                   </svg>
                 </div>
                 {/* Image */}
-                <Image
-                  className="inline-flex"
-                  src={WorflowImg01}
-                  width={350}
-                  height={288}
-                  alt="Workflow 01"
-                />
+             <img src="https://plus.unsplash.com/premium_photo-1691784080844-8300ab4c6790?q=80&w=2384&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="card-image" />
                 {/* Content */}
                 <div className="p-6">
                   <div className="mb-3">
@@ -66,9 +60,28 @@ export default function Workflows() {
                     </span>
                   </div>
                   <p className="text-indigo-200/65">
-                    Streamline the product development flow with a content
-                    platform that's aligned across specs and insights.
+                    Seamlessly integrate advanced medical IoT devices with a robust content platform designed to align data collection, device specifications, and insights in real-time
                   </p>
+                  <ul className="mt-4 space-y-3 text-sm text-indigo-200/65">
+                    <li className="flex items-center">
+                      <svg className="mr-2 h-3 w-3 shrink-0 fill-indigo-300" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                      </svg>
+                      <span>Pre-configured tools for medical IoT device management</span>
+                    </li>
+                    <li className="flex items-center">
+                      <svg className="mr-2 h-3 w-3 shrink-0 fill-indigo-300" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                      </svg>
+                      <span>Real-time monitoring of patient vitals across connected devices</span>
+                    </li>
+                    <li className="flex items-center">
+                      <svg className="mr-2 h-3 w-3 shrink-0 fill-indigo-300" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                      </svg>
+                      <span>Data visualization dashboards tailored for healthcare professionals</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </a>
@@ -96,13 +109,7 @@ export default function Workflows() {
                   </svg>
                 </div>
                 {/* Image */}
-                <Image
-                  className="inline-flex"
-                  src={WorflowImg02}
-                  width={350}
-                  height={288}
-                  alt="Workflow 02"
-                />
+                <img src="https://plus.unsplash.com/premium_photo-1661546665925-8fffaa9a0df3?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="card-image" />
                 {/* Content */}
                 <div className="p-6">
                   <div className="mb-3">
@@ -113,9 +120,28 @@ export default function Workflows() {
                     </span>
                   </div>
                   <p className="text-indigo-200/65">
-                    Streamline the product development flow with a content
-                    platform that's aligned across specs and insights.
+                  Expand your medical IoT ecosystem effortlessly with scalable solutions designed to support healthcare facilities of any size and complexity.
                   </p>
+                  <ul className="mt-4 space-y-3 text-sm text-indigo-200/65">
+                    <li className="flex items-center">
+                      <svg className="mr-2 h-3 w-3 shrink-0 fill-indigo-300" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                      </svg>
+                      <span>Cloud-based scalability for IoT data handling and storage</span>
+                    </li>
+                    <li className="flex items-center">
+                      <svg className="mr-2 h-3 w-3 shrink-0 fill-indigo-300" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                      </svg>
+                      <span>Rapid onboarding of new devices without disrupting existing workflows</span>
+                    </li>
+                    <li className="flex items-center">
+                      <svg className="mr-2 h-3 w-3 shrink-0 fill-indigo-300" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                      </svg>
+                      <span>Ensure compliance with healthcare data regulations at scale</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </a>
@@ -143,13 +169,7 @@ export default function Workflows() {
                   </svg>
                 </div>
                 {/* Image */}
-                <Image
-                  className="inline-flex"
-                  src={WorflowImg03}
-                  width={350}
-                  height={288}
-                  alt="Workflow 03"
-                />
+                <img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="card-image" />
                 {/* Content */}
                 <div className="p-6">
                   <div className="mb-3">
@@ -160,9 +180,28 @@ export default function Workflows() {
                     </span>
                   </div>
                   <p className="text-indigo-200/65">
-                    Streamline the product development flow with a content
-                    platform that's aligned across specs and insights.
+                  Create custom workflows for medical IoT device networks to ensure seamless collaboration between devices, clinicians, and patients.
                   </p>
+                  <ul className="mt-4 space-y-3 text-sm text-indigo-200/65">
+                    <li className="flex items-center">
+                      <svg className="mr-2 h-3 w-3 shrink-0 fill-indigo-300" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                      </svg>
+                      <span>Customizable data pipelines for patient-specific care</span>
+                    </li>
+                    <li className="flex items-center">
+                      <svg className="mr-2 h-3 w-3 shrink-0 fill-indigo-300" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                      </svg>
+                      <span>Integration with electronic health records (EHR) and telehealth systems</span>
+                    </li>
+                    <li className="flex items-center">
+                      <svg className="mr-2 h-3 w-3 shrink-0 fill-indigo-300" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                      </svg>
+                      <span>Workflow automation to reduce manual effort and enhance efficiency</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </a>
